@@ -12,12 +12,10 @@ function getComputerChoice(){
 }
 
 function getPlayerChoice(){
-    const gameArr = ['Rock', 'Paper', 'Scissors']; 
-    const result = getRandomString(gameArr);
-    return result;
+    const playerChoice = prompt("Your choice")
+    const caseIns = playerChoice.toLowerCase();
+    return caseIns;
 }
-
-
 function playRound(playerSelection, computerSelection){
     //PSEUDOCODE
     //if computerSelection = playerSelection, return tie
@@ -29,23 +27,53 @@ function playRound(playerSelection, computerSelection){
     //return playerSelection as winner
     //else return computerSelection as winner
 
-    if(computerSelection === playerSelection){
-        return "It's a tie!"
-}else if((computerSelection === "Rock") && (playerSelection == "Paper")
-||(computerSelection === "Scissors") && (playerSelection == "Rock")
-||(computerSelection === "Paper") && (playerSelection == "Scissors")){
-        return ("You win! " + playerSelection + " beats " + computerSelection)
-}else if((computerSelection === "Rock") && (playerSelection == "Scissors")
-||(computerSelection === "Scissors") && (playerSelection == "Paper")
-||(computerSelection === "Paper") && (playerSelection == "Rock")){
-        return ("You lose! " + computerSelection + " beats " + playerSelection)
+    const playerWin = ("You win! " + playerSelection + " beats " + computerSelection);
+    const playerLose = ("You lose! " + computerSelection + " beats " + playerSelection)
+    const playerTie = "It's a tie!";
+
+    if(computerSelection.toLowerCase() === playerSelection.toLowerCase()){
+        return playerTie; 
+}else if((computerSelection === "Rock") && (playerSelection == "paper")
+||(computerSelection === "Scissors") && (playerSelection == "rock")
+||(computerSelection === "Paper") && (playerSelection == "scissors")){
+        return playerWin;
+}else if((computerSelection === "Rock") && (playerSelection == "scissors")
+||(computerSelection === "Scissors") && (playerSelection == "paper")
+||(computerSelection === "Paper") && (playerSelection == "rock")){
+        return playerLose;
     }
 }
+function game(){
+    //call playRound 5 times. 
+    //display results of each round
+    //display winner at the end of the 5 rounds 
+    let compScore = 0;
+    let playerScore = 0; 
+    const results = [];
+    while((playerScore < 5) && (compScore < 5)){ 
 
+        const playerSelection = getPlayerChoice(); 
+        const computerSelection = getComputerChoice();
+        const result = playRound(playerSelection,computerSelection);
+        results.push(result);
 
-const playerSelection = getPlayerChoice(); 
-const computerSelection = getComputerChoice(); 
+        if(result === "It's a tie!"){
+            alert("It's a tie! " + "Score: " + playerScore + " to " + compScore)
+        }
+        else if(result === ("You win! " + playerSelection + " beats " + computerSelection)){
+            playerScore++; 
+            alert("You win this round, " + playerSelection + " beats " + computerSelection + ". Score: " + playerScore + " to " + compScore)
+        }else if(result === ("You lose! " + computerSelection + " beats " + playerSelection)){
+            compScore++;
+            alert("You lose! " + computerSelection + " beats " + playerSelection + ". Score: " + playerScore + " to " + compScore)
+        }
+    }
 
-console.log(playerSelection)
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));   
+    if(playerScore === 5){
+        alert("You Win! Final Score: " + playerScore + " to " + compScore)
+    }else
+        alert(("You Lose! Final Score: " + playerScore + " to " + compScore))
+
+}
+
+console.log(game());
