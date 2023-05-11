@@ -11,17 +11,26 @@ const cScore = document.querySelector('.comp-score');
 
 rockButton.addEventListener("click", function() {
     // Code for when the rock button is clicked
+    if(playerScore >= 5 || compScore >= 5){
+        return; 
+    }
     game("rock");
     
   });
   
 paperButton.addEventListener("click", function() {
     // Code for when the paper button is clicked
+    if(playerScore >= 5 || compScore >= 5){
+        return; 
+    }
     game("paper");
   });
   
 scissorsButton.addEventListener("click", function() {
     // Code for when the scissors button is clicked
+    if(playerScore >= 5 || compScore >= 5){
+        return; 
+    }
     game("scissors");
   });
 
