@@ -6,17 +6,20 @@ const pScore = document.querySelector('.player-score');
 const cScore = document.querySelector('.comp-score');
 const roundMessage = document.querySelector('.round-result');
 const gameMessage = document.querySelector('.game-result'); 
-
-
-
+const tryAgain = document.querySelector('.try-again');
+const paragraph = document.createElement('p');  
 
  //store scores 
  let compScore = 0;
  let playerScore = 0;
 
+ tryAgain.addEventListener('click', resetGame);
+
 rockButton.addEventListener("click", function() {
     // Code for when the rock button is clicked
     if(playerScore >= 5 || compScore >= 5){
+        paragraph.textContent = "Click to Play Again"          
+        tryAgain.appendChild(paragraph)
         return; 
     }
     game("rock");
@@ -26,6 +29,8 @@ rockButton.addEventListener("click", function() {
 paperButton.addEventListener("click", function() {
     // Code for when the paper button is clicked
     if(playerScore >= 5 || compScore >= 5){
+        paragraph.textContent = "Click to Play Again"          
+        tryAgain.appendChild(paragraph)
         return; 
     }
     game("paper");
@@ -34,12 +39,12 @@ paperButton.addEventListener("click", function() {
 scissorsButton.addEventListener("click", function() {
     // Code for when the scissors button is clicked
     if(playerScore >= 5 || compScore >= 5){
+        paragraph.textContent = "Click to Play Again"          
+        tryAgain.appendChild(paragraph)
         return; 
     }
     game("scissors");
   });
-
-
 
   // game logic // 
 
@@ -71,22 +76,20 @@ function playRound(playerSelection, computerSelection){
             ||(computerSelection === "Scissors") && (playerSelection == "paper")
             ||(computerSelection === "Paper") && (playerSelection == "rock")){
         return playerLose;
-    
     }
 }
 
 function game(playerSelection){
- 
         //call helper functions and declare variables 
         const computerSelection = getComputerChoice();
         const result = playRound(playerSelection,computerSelection);
-
         //determine output of round
         if(result === "It's a tie!"){
             console.log(playerScore)
             console.log(compScore)
             console.log("It's a tie! ");
             console.log("Score: " + playerScore + " to " + compScore);
+            roundMessage.textContent = ("It's a tie!");
         }
         else if(result === ("You win! " + playerSelection + " beats " + computerSelection)){
             playerScore++; 
@@ -106,7 +109,6 @@ function game(playerSelection){
             roundMessage.textContent = ("You lose! " + computerSelection + " beats " + playerSelection)
 
         }
-
     //display final score
     if(playerScore >= 5){ 
         console.log(playerScore)
@@ -121,7 +123,16 @@ function game(playerSelection){
 
 }
 
-
+function resetGame() {
+    playerScore = 0;
+    compScore = 0;
+    pScore.textContent = '0';
+    cScore.textContent = '0';
+    tryAgain.style.display = '';
+    tryAgain.textContent = null; 
+    gameMessage.textContent = null;
+    roundMessage.textContent = null;
+  }
 
 //helper function
 function getRandomString(arr) {
