@@ -2,8 +2,8 @@
 const rockButton = document.getElementById("rock");
 const paperButton = document.getElementById("paper");
 const scissorsButton = document.getElementById("scissors"); 
-const pScore = document.getElementById("player-score");
-const cScore = document.getElementById("comp-score");
+const pScore = document.querySelector('.player-score');
+const cScore = document.querySelector('.comp-score');
 
  //store scores 
  let compScore = 0;
@@ -78,12 +78,14 @@ function game(playerSelection){
             playerScore++; 
             console.log(playerScore)
             console.log(compScore)
+            pScore.textContent = playerScore.toString(); 
             console.log("You win this round, " + playerSelection + " beats " + computerSelection);
             console.log("Score: " + playerScore + " to " + compScore);
         }else if(result === ("You lose! " + computerSelection + " beats " + playerSelection)){
             compScore++;
             console.log(playerScore)
             console.log(compScore)
+            cScore.textContent = compScore.toString(); 
             console.log("You lose! " + computerSelection + " beats " + playerSelection);
             console.log("Score: " + playerScore + " to " + compScore);
         }
