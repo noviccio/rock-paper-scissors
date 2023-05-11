@@ -4,6 +4,11 @@ const paperButton = document.getElementById("paper");
 const scissorsButton = document.getElementById("scissors"); 
 const pScore = document.querySelector('.player-score');
 const cScore = document.querySelector('.comp-score');
+const roundMessage = document.querySelector('.round-result');
+const gameMessage = document.querySelector('.game-result'); 
+
+
+
 
  //store scores 
  let compScore = 0;
@@ -88,7 +93,8 @@ function game(playerSelection){
             console.log(playerScore)
             console.log(compScore)
             pScore.textContent = playerScore.toString(); 
-            console.log("You win this round, " + playerSelection + " beats " + computerSelection);
+            console.log("You win this round, " + playerSelection + " beats " + computerSelection); 
+            roundMessage.textContent = ("You win this round, " + playerSelection + " beats " + computerSelection)
             console.log("Score: " + playerScore + " to " + compScore);
         }else if(result === ("You lose! " + computerSelection + " beats " + playerSelection)){
             compScore++;
@@ -97,18 +103,20 @@ function game(playerSelection){
             cScore.textContent = compScore.toString(); 
             console.log("You lose! " + computerSelection + " beats " + playerSelection);
             console.log("Score: " + playerScore + " to " + compScore);
+            roundMessage.textContent = ("You lose! " + computerSelection + " beats " + playerSelection)
+
         }
 
     //display final score
     if(playerScore >= 5){ 
         console.log(playerScore)
-        console.log("You Win!")
-        console.log("Final Score: " + playerScore + " to " + compScore)
+        gameMessage.textContent = ("You Win!")
+        roundMessage.textContent = ("Final Score: " + playerScore + " to " + compScore)
     }
     if (compScore >= 5){
         console.log(compScore)
-        console.log("You Lose!")
-        console.log("Final Score: " + playerScore + " to " + compScore)
+        gameMessage.textContent = ("You Lose!")
+        roundMessage.textContent = ("Final Score: " + playerScore + " to " + compScore)
     }
 
 }
