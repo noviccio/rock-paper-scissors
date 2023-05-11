@@ -1,4 +1,4 @@
-//getting buttons for DOM
+//getting nodes for DOM
 const rockButton = document.getElementById("rock");
 const paperButton = document.getElementById("paper");
 const scissorsButton = document.getElementById("scissors"); 
@@ -10,16 +10,13 @@ const tryAgain = document.querySelector('.try-again');
 const paragraph = document.createElement('p');  
 
  //store scores 
- let compScore = 0;
- let playerScore = 0;
+let compScore = 0;
+let playerScore = 0;
 
- tryAgain.addEventListener('click', resetGame);
+tryAgain.addEventListener('click', resetGame);
 
 rockButton.addEventListener("click", function() {
-    // Code for when the rock button is clicked
     if(playerScore >= 5 || compScore >= 5){
-        paragraph.textContent = "Click to Play Again"          
-        tryAgain.appendChild(paragraph)
         return; 
     }
     game("rock");
@@ -27,20 +24,14 @@ rockButton.addEventListener("click", function() {
   });
   
 paperButton.addEventListener("click", function() {
-    // Code for when the paper button is clicked
     if(playerScore >= 5 || compScore >= 5){
-        paragraph.textContent = "Click to Play Again"          
-        tryAgain.appendChild(paragraph)
         return; 
     }
     game("paper");
   });
   
 scissorsButton.addEventListener("click", function() {
-    // Code for when the scissors button is clicked
     if(playerScore >= 5 || compScore >= 5){
-        paragraph.textContent = "Click to Play Again"          
-        tryAgain.appendChild(paragraph)
         return; 
     }
     game("scissors");
@@ -80,33 +71,33 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(playerSelection){
-        //call helper functions and declare variables 
-        const computerSelection = getComputerChoice();
-        const result = playRound(playerSelection,computerSelection);
-        //determine output of round
-        if(result === "It's a tie!"){
-            console.log(playerScore)
-            console.log(compScore)
-            console.log("It's a tie! ");
-            console.log("Score: " + playerScore + " to " + compScore);
-            roundMessage.textContent = ("It's a tie!");
-        }
-        else if(result === ("You win! " + playerSelection + " beats " + computerSelection)){
-            playerScore++; 
-            console.log(playerScore)
-            console.log(compScore)
-            pScore.textContent = playerScore.toString(); 
-            console.log("You win this round, " + playerSelection + " beats " + computerSelection); 
-            roundMessage.textContent = ("You win this round, " + playerSelection + " beats " + computerSelection)
-            console.log("Score: " + playerScore + " to " + compScore);
-        }else if(result === ("You lose! " + computerSelection + " beats " + playerSelection)){
-            compScore++;
-            console.log(playerScore)
-            console.log(compScore)
-            cScore.textContent = compScore.toString(); 
-            console.log("You lose! " + computerSelection + " beats " + playerSelection);
-            console.log("Score: " + playerScore + " to " + compScore);
-            roundMessage.textContent = ("You lose! " + computerSelection + " beats " + playerSelection)
+    //call helper functions and declare variables 
+    const computerSelection = getComputerChoice();
+    const result = playRound(playerSelection,computerSelection);
+    //determine output of round
+    if(result === "It's a tie!"){
+        console.log(playerScore)
+        console.log(compScore)
+        console.log("It's a tie! ");
+        console.log("Score: " + playerScore + " to " + compScore);
+        roundMessage.textContent = ("It's a tie!");
+    }
+    else if(result === ("You win! " + playerSelection + " beats " + computerSelection)){
+        playerScore++; 
+        console.log(playerScore)
+        console.log(compScore)
+        pScore.textContent = playerScore.toString(); 
+        console.log("You win this round, " + playerSelection + " beats " + computerSelection); 
+        roundMessage.textContent = ("You win this round, " + playerSelection + " beats " + computerSelection)
+        console.log("Score: " + playerScore + " to " + compScore);
+    }else if(result === ("You lose! " + computerSelection + " beats " + playerSelection)){
+        compScore++;
+        console.log(playerScore)
+        console.log(compScore)
+        cScore.textContent = compScore.toString(); 
+        console.log("You lose! " + computerSelection + " beats " + playerSelection);
+        console.log("Score: " + playerScore + " to " + compScore);
+        roundMessage.textContent = ("You lose! " + computerSelection + " beats " + playerSelection)
 
         }
     //display final score
@@ -114,11 +105,15 @@ function game(playerSelection){
         console.log(playerScore)
         gameMessage.textContent = ("You Win!")
         roundMessage.textContent = ("Final Score: " + playerScore + " to " + compScore)
+        paragraph.textContent = "Click to Play Again"          
+        tryAgain.appendChild(paragraph)
     }
     if (compScore >= 5){
         console.log(compScore)
         gameMessage.textContent = ("You Lose!")
         roundMessage.textContent = ("Final Score: " + playerScore + " to " + compScore)
+        paragraph.textContent = "Click to Play Again"          
+        tryAgain.appendChild(paragraph)
     }
 
 }
